@@ -1,5 +1,9 @@
 from django.shortcuts import render
+
+from django.http import JsonResponse
 from .models import *
+import json
+
 # Create your views here.
 def cart(request):
     if request.user.is_authenticated:
@@ -31,3 +35,13 @@ def checkout(request):
     
     context = {'order': order, 'items': items}
     return render(request, 'base/checkout.html', context)
+
+def updateItem(request):
+    data = json.loads(request.body)
+    productId = data['productId']
+    action = data['action']
+    print('productId', productId, 'action:', action)
+    
+    customer = request.user.customer
+    product = Product.obcjets.get(id=productId)
+    return JsonResponse('Item was added', safe=False)
