@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import functools
 
 # Create your models here.
 
@@ -48,6 +49,15 @@ class Order(models.Model):
         total = sum([item.get_total for item in order_items])
         return total
     
+    @property
+    def shipping(self):
+        order_items = self.orderitem_set.all()
+        for item in order_items:
+            # when at least one product is not digital, return True
+            if not item.product.digital:
+                return True
+        return False
+        
 class OrderItem(models.Model):
     product=models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
     order=models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
