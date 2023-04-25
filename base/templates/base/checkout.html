@@ -6,51 +6,58 @@
 <div class="row">
     <div class="col-lg-6">
         <div class="box-element" id="form-wrapper">
-			<form id="form">
-				<div id="user-info">
-					<p>User Information:</p>
-					<hr>
-					<div class="form-field">
-						<input required class="form-control" type="text" name="name" placeholder="Name..">
-					</div>
-					<div class="form-field">
-						<input required class="form-control" type="email" name="email" placeholder="Email..">
-					</div>
-				</div>
-				
-				<div id="shipping-info">
-					<hr>
-					<p>Shipping Information:</p>
-					<hr>
-					<div class="form-field">
-						<input class="form-control" type="text" name="address" placeholder="Address..">
-					</div>
-					<div class="form-field">
-						<input class="form-control" type="text" name="city" placeholder="City..">
-					</div>
-					<div class="form-field">
-						<input class="form-control" type="text" name="state" placeholder="State..">
-					</div>
-					<div class="form-field">
-						<input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
-					</div>
-					<div class="form-field">
-						<input class="form-control" type="text" name="country" placeholder="Zip code..">
-					</div>
+			<form id="form" method="POST" action="/process-order/">
+				{% csrf_token %}
+
+				{% if not request.user.is_authenticated %}
+				<p>User Information:</p>
+				<hr>
+				<div class="form-field">
+					<p>Name</p>
+					{{form.name}}
 				</div>
 
+				<div class="form-field">
+					<p>Email</p>
+					{{form.email}}
+				</div>
+				
+				{% endif %}
+
+				{% if order.shipping %}
+				<p>Shipping Information:</p>
 				<hr>
-				<input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
-			</form>
-            <br>
+				<div class="form-field">
+					<p>Address</p>
+					{{form.address}}
+				</div>
+
+				<div class="form-field">
+					<p>City</p>
+					{{form.city}}
+				</div>
+
+				<div class="form-field">
+					<p>State</p>
+					{{form.state}}
+				</div>
+
+				<div class="form-field">
+					<p>ZipCode</p>
+					{{form.zipcode}}
+				</div>
+				
+				{% endif %}
+				<hr>
+				<button id="form-button" class="btn btn-success btn-block">Continue</button>
+				<br>
+				<div class='box-element hidden' id='payment-info'>
+					<small>Paypal options</small>
+					<input type='submit' id='make-payment' value='Make Payment'/>
+				</div>
+			</form>  
 		</div>
 		<br>
-		<div class='box-element hidden' id='payment-info'>
-			<small>Paypal options</small>
-			<button id='make-payment'>Make Payment</button>
-		</div>
-        
-        
     </div>
 
     <div class="col-lg-6">
@@ -77,36 +84,21 @@
 
 <script type='text/javascript'>
 	var shipping = '{{order.shipping}}'
-	if (shipping == 'False') {
-		document.getElementById('shipping-info').innerHTML = ''
-	}
+	var total = '{{order.get_cart_total}}'
 
-	if (user != 'AnonymousUser'){
-		document.getElementById('user-info').innerHTML = ''
-	}
-
-	if (user != 'AnonymousUser' && shipping =='False'){
+	{% comment %} if (user != 'AnonymousUser' && shipping =='False'){
 		// if user is logged in and have only digital items
 		// show the payment option and hide the shipping form
 		document.getElementById('form-wrapper').classList.add('hidden')
 		document.getElementById('payment-info').classList.remove('hidden')
-	}
+	} {% endcomment %}
 
-	var form = document.getElementById('form')
-	form.addEventListener('submit', function(e) {
+	var formButton = document.getElementById('form-button').addEventListener('click', function(e) {
+		console.log('Button clicked')
 		e.preventDefault()
-		console.log('Form submitted')
 		document.getElementById('form-button').classList.add('hidden')
 		document.getElementById('payment-info').classList.remove('hidden')
 	})
 
-	function submitFormData(){
-		console.log('Payment button clicked - Data submitted')
-	}
-
-	var paymentButton = document.getElementById('make-payment')
-	paymentButton.addEventListener('click', function(e){
-		submitFormData()
-	})
 </script>
 {% endblock content %}

@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from .models import *
+from .forms import ShippingForm
 import json
+import datetime
 
 # Create your views here.
 def cart(request):
@@ -19,23 +21,12 @@ def cart(request):
     return render(request, 'base/cart.html', context)
 
 def store(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_total
-    else:
-        items = []
-        order = {'get_cart_total': 0,
-                 'get_cart_total_price': 0,
-                 }
-        cartItems = order['get_cart_total']
-    
     products = Product.objects.all()
-    context = {'products': products, 'cartItems': cartItems}
+    context = {'products': products}
     return render(request, 'base/store.html', context)
 
 def checkout(request):
+    form = ShippingForm()
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -45,8 +36,8 @@ def checkout(request):
         order = {'get_cart_total': 0,
                  'get_cart_total_price': 0,
                  'shipping': False}
-    
-    context = {'order': order, 'items': items}
+        
+    context = {'order': order, 'items': items, 'form': form}
     return render(request, 'base/checkout.html', context)
 
 def updateItem(request):
@@ -71,3 +62,31 @@ def updateItem(request):
         orderItem.delete()
                
     return JsonResponse('Item was added', safe=False)
+
+def processOrder(request):
+    
+    if request.method == "POST":
+        print('dotarlem PROCESS')
+        
+        transaction_id = datetime.datetime.now().timestamp()
+        
+        if request.user.is_authenticated:
+            customer = request.user.customer
+            order, created = Order.objects.get_or_create(customer=customer, complete=False)
+            order.transaction_id = transaction_id
+            order.complete = True
+            order.save()
+            
+            if order.shipping == True:
+                ShippingAddress.objects.create(
+                    customer = customer,
+                    order = order,
+                    address = request.POST.get('address'),
+                    city = request.POST.get('city'),
+                    state = request.POST.get('state'),
+                    zipcode = request.POST.get('zipcode'),
+                )
+            return redirect('store')
+        else:
+            print('User is not logged in')
+            return redirect('store')
