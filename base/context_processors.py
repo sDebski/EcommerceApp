@@ -1,4 +1,5 @@
 from .models import Order
+import json
 
 def cart_items_total(request):
     if request.user.is_authenticated:
@@ -12,9 +13,16 @@ def cart_items_total(request):
             except:
                 return {'total': 0}
             else: 
-                return {'total': order.get_cart_total}
-                
+                return {'total': order.get_cart_total}         
     else:
-        return {'total': 0}
+        try:
+            cart = json.loads(request.COOKIES['cart'])
+        except:
+            cart = {}
+        cartItems = 0
+        for i in cart:
+            cartItems += cart[i]['quantity']
+        print('Cart:', cart)
+        return {'total': cartItems}
             
     

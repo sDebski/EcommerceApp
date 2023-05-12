@@ -52,8 +52,9 @@
 				<button id="form-button" class="btn btn-success btn-block">Continue</button>
 				<br>
 				<div class='box-element hidden' id='payment-info'>
-					<small>Paypal options</small>
-					<input type='submit' id='make-payment' value='Make Payment'/>
+					<small>Paypal Options</small>
+					<div id="paypal-button-container"></div>
+					{% comment %} <input type='submit' id='make-payment' value='Make Payment'/> {% endcomment %}
 				</div>
 			</form>  
 		</div>
@@ -81,17 +82,45 @@
         </div>
     </div>
 </div>
+<script src="https://www.paypal.com/sdk/js?client-id=ATgpKJN0DNcxP-EOALFIpcgvVlmpmAn3o4xSi0V06WsMrV5WcL4ZPiUBsY1XZn3cxJegx5nZSe4iFu8y&currency=USD"></script>
+<script>
+	var total = '{{order.get_cart_total_price}}'
+	paypal.Buttons({
+		style: {
+			color:  'blue',
+			shape:  'pill',
+			label:  'pay',
+			height: 40,
+			fundingicons: 'true',
+		},
+		funding: {
+			allowed: [ paypal.FUNDING.CARD ],
+			disallowed: [ paypal.FUNDING.CREDIT ]
+		},
+		// Call your server to set up the transaction
+		createOrder: function(data, actions) {
+			return actions.order.create({
+				purchase_units: [{
+					amount: {
+						value: parseFloat(total).toFixed(2)
+					}
+				}]
+			});
+		},
 
+		// Call your server to finalize the transaction
+		onApprove: function(data, actions) {
+			return actions.order.capture().then(function(details) {
+				alert('Transaction completed by ' + details.payer.name.given_name + "!");
+			});
+		}
+
+	}).render('#paypal-button-container');
+</script>	
 <script type='text/javascript'>
 	var shipping = '{{order.shipping}}'
 	var total = '{{order.get_cart_total}}'
 
-	{% comment %} if (user != 'AnonymousUser' && shipping =='False'){
-		// if user is logged in and have only digital items
-		// show the payment option and hide the shipping form
-		document.getElementById('form-wrapper').classList.add('hidden')
-		document.getElementById('payment-info').classList.remove('hidden')
-	} {% endcomment %}
 
 	var formButton = document.getElementById('form-button').addEventListener('click', function(e) {
 		console.log('Button clicked')
