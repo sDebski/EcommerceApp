@@ -80,3 +80,15 @@ class ShippingAddress(models.Model):
     def __str__(self):
         return self.address
     
+class Comment(models.Model):
+    customer=models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
+    product=models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
+    content=models.TextField(max_length=500)
+    date_added=models.DateTimeField(auto_now_add=True)
+    
+class ProductRating(models.Model):
+    customer=models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
+    product=models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
+    value=models.IntegerField(default=0)
+
+    

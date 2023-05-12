@@ -75,4 +75,17 @@ def processOrder(request):
         return deleteCartAndRedirect(request)
         
     return HttpResponse('not POST request')
+
+def viewItem(request, pk):
+    product = Product.objects.get(id=pk)
+    comments = product.comment_set.all().order_by('-date_added')
+    ratings = product.productrating_set.all()
+    try:
+        rating_mean = sum([rating.value for rating in ratings])/len(comments)
+    except:
+        rating_mean = 0
+    context = {'product': product,
+               'rating_mean': rating_mean,
+               'comments': comments}
+    return render(request, 'base/view_item.html', context)
     

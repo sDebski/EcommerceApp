@@ -7,4 +7,6 @@ admin.site.register(ShippingAddress)
 admin.site.register(Product)
 admin.site.register(Order)
 admin.site.register(OrderItem)
+admin.site.register(Comment)
+admin.site.register(ProductRating)
 # Register your models here.
