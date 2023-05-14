@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-
+from django.core.paginator import Paginator
 from django.http import JsonResponse, HttpResponse
 from .models import *
 from .forms import ShippingForm
@@ -79,13 +79,60 @@ def processOrder(request):
 def viewItem(request, pk):
     product = Product.objects.get(id=pk)
     comments = product.comment_set.all().order_by('-date_added')
+    paginator = Paginator(comments, 2)
+    
+    
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
     ratings = product.productrating_set.all()
     try:
-        rating_mean = sum([rating.value for rating in ratings])/len(comments)
+        my_rating = ProductRating.objects.get(product=product, customer = request.user.customer)
+    except:
+        print('zez')
+        my_rating = 0
+    try:
+        rating_mean = sum([rating.value for rating in ratings])/len(ratings)
     except:
         rating_mean = 0
     context = {'product': product,
                'rating_mean': rating_mean,
-               'comments': comments}
+               'comments': comments,
+               'rating_amount': len(ratings),
+               'my_rating': my_rating.value,
+               'page_obj': page_obj}
     return render(request, 'base/view_item.html', context)
+
+def ratingItem(request, pk, value):
+    if request.user.is_authenticated:
+        try:
+            product = Product.objects.get(id=pk)
+        except:
+            product = None
+        print(product, value)
+        if product and int(value) in [1,2,3,4,5]:  
+            rating, created = ProductRating.objects.get_or_create(customer = request.user.customer, product = product)
+            rating.value = value
+            rating.save()
+            print('udalo sie')
+            return redirect('view-item', pk = pk)
+        else: 
+            return HttpResponse('No product or wrong rating')
+    else:
+        return redirect('store')
     
+    return HttpResponse(str(pk) + ' ' + str(value))
+    
+def commentItem(request, pk):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            product = Product.objects.get(id=pk)
+            content = request.POST.get('body')
+            Comment.objects.create(
+                customer = request.user.customer,
+                content = content,
+                product = product
+            )
+            return redirect('view-item', pk=pk)
+    else:
+        return redirect('store')

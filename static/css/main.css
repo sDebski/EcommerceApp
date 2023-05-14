@@ -1,3 +1,4 @@
+
 body{
 	background-color: hsl(0, 0%, 98%);
 }
@@ -137,4 +138,57 @@ h1,h2,h3,h4,h5,h6{
 		  }
  .mean_rating {
 	color: orange;
+ }
+
+ .comment > form > input {
+	/* resize: none; */
+	background-color: lightslategrey;
+	color: black;
+	border: none;
+	/* outline: none; */
+	border-radius: 0.7rem;
+	height: 4.5rem;
+	width: 100%;
+	padding: 1.2rem;
+	font-size: 1.4rem;
+	font-weight: 500;
+	position: relative;
+  }
+  
+  .comment > form > input::placeholder {
+	color: lightgrey;
+  }
+
+ .description-section {
+	align-items: center;
+	justify-content: center;
+	background-color: aqua;
+	text-align: center;
+ }
+
+ .price {
+	color: blue;
+	font-weight: bolder;
+	font-size: larger;
+ }
+
+ .description {
+	font-weight:bolder;
+	font-size:x-large;
+	color: white;
+ }
+
+ .rating-section {
+	
+	background-color: white;
+ }
+
+
+ .comment-section {
+	background-color: green;
+ }
+
+ .description-image {
+	height: 18rem;
+	width: 22rem;
  }
