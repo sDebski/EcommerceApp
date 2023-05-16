@@ -4,12 +4,12 @@
 {% block content %}
 
     <div class='row'>
-        {% for product in products %}
+        {% for product in page_obj %}
              
         <div class='col-lg-4'>
             <img class='thumbnail' src="{{product.imageURL}}"/>
             <div class='box-element product'>
-                <h6><strong>{{product.name}}</strong></h6>
+                <h6><strong>{{product.name|capfirst}}</strong></h6>
                 <hr/>
                 <button data-product={{product.id}} data-action="add" class='btn btn-outline-secondary add-btn update-cart'>Add to Cart
                 </button>
@@ -21,6 +21,24 @@
         {% endfor %}
 
     </div>
+    <div class="pagination shadow my-pagination" style="margin-top:1%;">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    
 {% endblock content %}
 
 

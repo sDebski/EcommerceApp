@@ -7,72 +7,77 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="box-element ">
-            <div class='description-section'>
-                <img class="description-image" src="{{product.imageURL}}">
-                <p class='description'>{{product.name}}</p>
-                <p class='price'>Price: ${{product.price|floatformat:2}}
+            <div class='description-section shadow'>
+                <div class='description-image-box'>
+                    <img class="description-image" src="{{product.imageURL}}">
+                </div>
+                <div class='description-price-box shadow'>
+                    <p class='description'>{{product.name|capfirst}}</p>
+                    <p class='price'>{{product.price|floatformat:2}}$            
+                        <div class='rating-section'>
+                            <h4>Mean rating: {{rating_mean}} <text class='mean_rating'>★</text>({{rating_amount}})</h4>
+                            {% if request.user.is_authenticated %}
+                                {% if my_rating != 0 %}
+                                    <h4>My rating: {{my_rating}} <text class='mean_rating'>★</text></h4>
+                                {% endif %}
+                                <h4>Add rating:</h4>
+                                <div class="rating rating2">
+                                    <a href="/rating-item/{{product.id}}/5" title="Give 5 stars">★</a>
+                                    <a href="/rating-item/{{product.id}}/4" title="Give 4 stars">★</a>
+                                    <a href="/rating-item/{{product.id}}/3" title="Give 3 stars">★</a>
+                                    <a href="/rating-item/{{product.id}}/2" title="Give 2 stars">★</a>
+                                    <a href="/rating-item/{{product.id}}/1" title="Give 1 stars">★</a>
+                                </div>
+                            {% endif %}
+                        </div>  
+                </div>
             </div>
         </div>
 
-        <div class="box-element">
-            <div class='rating-section'>
-                <h1>Product`s rating:</h1>
-                <h2>Mean rating: {{rating_mean}} <text class='mean_rating'>★</text>({{rating_amount}})</h2>
-                {% if request.user.is_authenticated %}
-                    {% if my_rating != 0 %}
-                        <h2>My rating: {{my_rating}} <text class='mean_rating'>★</text></h2>
-                    {% endif %}
-                    Add rating:
-                    <div class="rating rating2">
-                        <a href="/rating-item/{{product.id}}/5" title="Give 5 stars">★</a>
-                        <a href="/rating-item/{{product.id}}/4" title="Give 4 stars">★</a>
-                        <a href="/rating-item/{{product.id}}/3" title="Give 3 stars">★</a>
-                        <a href="/rating-item/{{product.id}}/2" title="Give 2 stars">★</a>
-                        <a href="/rating-item/{{product.id}}/1" title="Give 1 stars">★</a>
-                    </div>
-                {% endif %}
-            </div>            
-        </div>
 
         <div class="box-element">
             <div class='comment-section'>
                 <div class='comment'>
                     <form method="POST" action="/comment-item/{{product.id}}">
                         {% csrf_token %}
-                        <input name="body" placeholder="Write your message here..." />
+                        <input class='shadow' name="body" placeholder="Write your message here..." />
                     </form>
                 </div>
 
-                <h1>Comments:</h1>
                 {% for comment in page_obj %}
-                    <text>{{comment.customer}}</text>
-                    <h2>{{comment.content}}</h2>
-                    <text>{{comment.date_added|timesince}}</text>
-                    <br/>
-                    <hr/>
+                    <div class='comment-box shadow'>
+                        <div class='comment-top'>
+                            <text>{{comment.customer}}, </text>
+                            <text>{{comment.date_added}}</text>
+                        </div>
+                        <div class='comment-body'>
+                            {{comment.content}}
+                        </div>
+                    </div>
                 {% empty %}
                     <h1>No comment has been added yet.</h1>
                 {% endfor %}
+                <div class="pagination shadow my-pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                        {% endif %}
+    
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+    
+                        {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">next</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
             </div>
             
 
-            <div class="pagination">
-                <span class="step-links">
-                    {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo; first</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                    {% endif %}
-
-                    <span class="current">
-                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                    </span>
-
-                    {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">next</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                    {% endif %}
-                </span>
-            </div>
+            
         </div>
     </div>
 </div>

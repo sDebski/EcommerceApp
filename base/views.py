@@ -14,8 +14,13 @@ def cart(request):
     return render(request, 'base/cart.html', context)
 
 def store(request):
-    products = Product.objects.all()
-    context = {'products': products}
+    products = Product.objects.all().reverse()
+    print(type(products))
+    paginator = Paginator(products, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    context = {'page_obj': page_obj}
     return render(request, 'base/store.html', context)
 
 def checkout(request):
@@ -87,7 +92,7 @@ def viewItem(request, pk):
     
     ratings = product.productrating_set.all()
     try:
-        my_rating = ProductRating.objects.get(product=product, customer = request.user.customer)
+        my_rating = ProductRating.objects.get(product=product, customer = request.user.customer).value
     except:
         print('zez')
         my_rating = 0
@@ -99,7 +104,7 @@ def viewItem(request, pk):
                'rating_mean': rating_mean,
                'comments': comments,
                'rating_amount': len(ratings),
-               'my_rating': my_rating.value,
+               'my_rating': my_rating,
                'page_obj': page_obj}
     return render(request, 'base/view_item.html', context)
 

@@ -1,194 +1,253 @@
 
 body{
-	background-color: hsl(0, 0%, 98%);
+background-color: hsl(0, 0%, 98%);
 }
 
 h1,h2,h3,h4,h5,h6{
-	color:hsl(0, 0%, 30%);
+color:hsl(0, 0%, 30%);
 }
 
 .box-element{
-	box-shadow:hsl(0, 0%, 80%) 0 0 16px;
-	background-color: #fff;
-	border-radius: 4px;
-	padding: 10px;
+box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+background-color: #fff;
+border-radius: 4px;
+padding: 10px;
 }
 
 .thumbnail{
-	width: 100%;
-	height: 200px;
-	-webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
-    -moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
-    box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+width: 100%;
+height: 200px;
+-webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+-moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
 }
 
 .product{
-	border-radius: 0 0 4px 4px;
+border-radius: 0 0 4px 4px;
 }
 
 .bg-dark{
-	background-color: #4f868c!important;
+background-color: #4f868c!important;
 }
 
 #cart-icon{
-	width:25px;
-	display: inline-block;
-	margin-left: 15px;
+width:25px;
+display: inline-block;
+margin-left: 15px;
 }
 
 #cart-total{
-	display: block;
-	text-align: center;
-	color:#fff;
-	background-color: red;
-	width: 20px;
-	height: 25px;
-	border-radius: 50%;
-	font-size: 14px;
+display: block;
+text-align: center;
+color:#fff;
+background-color: red;
+width: 20px;
+height: 25px;
+border-radius: 50%;
+font-size: 14px;
 }
 
 .col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12{
-	margin-top: 10px;
+margin-top: 10px;
 }
 
 .btn{
-	border-radius: 0;
+border-radius: 0;
 }
 
 .row-image{
-	width: 100px;
+width: 100px;
 }
 
 .form-field{
-	width:250px;
-	display: inline-block;
-	padding: 5px;
+width:250px;
+display: inline-block;
+padding: 5px;
 }
 
 .cart-row{
-	display: flex;
-    align-items: flex-stretch;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #ececec;
+display: flex;
+align-items: flex-stretch;
+padding-bottom: 10px;
+margin-bottom: 10px;
+border-bottom: 1px solid #ececec;
 
 }
 
 .quantity{
-	display: inline-block;
-	font-weight: 700;
-	padding-right:10px;
-	
+display: inline-block;
+font-weight: 700;
+padding-right:10px;
+
 
 }
 
 .chg-quantity{
-	width: 12px;
-	cursor: pointer;
-	display: block;
-	margin-top: 5px;
-	transition:.1s;
+width: 12px;
+cursor: pointer;
+display: block;
+margin-top: 5px;
+transition:.1s;
 }
 
 .chg-quantity:hover{
-	opacity: .6;
+opacity: .6;
 }
 
 
 .hidden{
-	display: none!important;
+display: none!important;
 }
 
 .rating {
-	width: 300px;
-	margin: 0 auto 1em;
-	font-size: 45px;
-	overflow:hidden;
-  }
-  .rating input {
-	float: right;
-	opacity: 0;
-	position: absolute;
-  }
-  .rating a, 
-  .rating label {
-			  float:right;
-			  color: #aaa;
-			  text-decoration: none;
-			  -webkit-transition: color .4s;
-			  -moz-transition: color .4s;
-			  -o-transition: color .4s;
-			  transition: color .4s;
-		  }
-  .rating label:hover ~ label,
-  .rating input:focus ~ label,
-  .rating label:hover,
-		  .rating a:hover,
-		  .rating a:hover ~ a,
-		  .rating a:focus,
-		  .rating a:focus ~ a		{
-			  color: orange;
-			  cursor: pointer;
-		  }
-		  .rating2 {
-			  direction: rtl;
-		  }
-		  .rating2 a {
-			  float:none
-		  }
- .mean_rating {
-	color: orange;
- }
+width: 300px;
+margin: 0 auto 1em;
+font-size: 45px;
+overflow:hidden;
+}
+.rating input {
+float: right;
+opacity: 0;
+position: absolute;
+}
+.rating a, 
+.rating label {
+			float:right;
+			color: #aaa;
+			text-decoration: none;
+			-webkit-transition: color .4s;
+			-moz-transition: color .4s;
+			-o-transition: color .4s;
+			transition: color .4s;
+		}
+.rating label:hover ~ label,
+.rating input:focus ~ label,
+.rating label:hover,
+		.rating a:hover,
+		.rating a:hover ~ a,
+		.rating a:focus,
+		.rating a:focus ~ a		{
+			color: orange;
+			cursor: pointer;
+		}
+		.rating2 {
+			direction: rtl;
+		}
+		.rating2 a {
+			float:none
+		}
+.mean_rating {
+color: orange;
+}
 
- .comment > form > input {
-	/* resize: none; */
-	background-color: lightslategrey;
+.comment > form > input {
+/* resize: none; */
+background-color: lightslategrey;
+color: black;
+border: none;
+/* outline: none; */
+border-radius: 0.7rem;
+height: 4.5rem;
+width: 100%;
+padding: 1.2rem;
+font-size: 1.4rem;
+font-weight: 500;
+position: relative;
+}
+
+.comment > form > input::placeholder {
+color: lightgrey;
+}
+
+.description-section {
+display: grid;
+grid-template-columns: 1fr 1fr;
+grid-gap: 20px;
+text-align: center;
+padding: 1%;
+}
+
+.description-image-box {
+text-align: center;
+padding-top: 1em;
+border-radius: 10%;
+
+}
+
+.shadow {
+-webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+-moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+background-color: #fff;
+border-radius: 4px;
+}
+
+.description-price-box {
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+text-align: center;
+border-radius: 5%;
+background-color: lightblue;
+padding-top: 1%;
+}
+
+.price {
+font-weight: bolder;
+font-size: x-large;
+}
+
+.description {
+font-weight:bolder;
+font-size:x-large;
+}
+
+.rating-section {
+background-color: white;
+}
+
+.comment-section {
+padding: 1%;
+
+}
+
+.comment-box {
+margin-top: 1%;
+margin-bottom: 1%;
+padding: 1%;
+background-color: white;
+}
+
+.comment-top {
+font-family: 'Times New Roman', Times, serif;
+font-size: medium;
+background-color: lightskyblue;
+padding: 1%;
+border-bottom: #4f868c 1px solid;
+}
+
+.comment-body {
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+font-size: larger;
+background-color: lightblue;
+padding: 1%;
+}
+
+.description-image {
+height: 18rem;
+width: 22rem;
+}
+
+.my-pagination {
+font-family: Georgia, 'Times New Roman', Times, serif, !important;
+text-align: center!important; 
+padding: 1%;
+justify-content: center;
+font-size: large;
+}
+
+.my-pagination > a:hover, a {
+	text-decoration: none!important;
 	color: black;
-	border: none;
-	/* outline: none; */
-	border-radius: 0.7rem;
-	height: 4.5rem;
-	width: 100%;
-	padding: 1.2rem;
-	font-size: 1.4rem;
-	font-weight: 500;
-	position: relative;
-  }
-  
-  .comment > form > input::placeholder {
-	color: lightgrey;
-  }
-
- .description-section {
-	align-items: center;
-	justify-content: center;
-	background-color: aqua;
-	text-align: center;
- }
-
- .price {
-	color: blue;
 	font-weight: bolder;
-	font-size: larger;
- }
+}
 
- .description {
-	font-weight:bolder;
-	font-size:x-large;
-	color: white;
- }
-
- .rating-section {
-	
-	background-color: white;
- }
-
-
- .comment-section {
-	background-color: green;
- }
-
- .description-image {
-	height: 18rem;
-	width: 22rem;
- }
