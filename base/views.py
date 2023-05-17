@@ -1,13 +1,64 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
+from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse, HttpResponse
 from .models import *
-from .forms import ShippingForm
+from .forms import *
 from .utils import cookieCart, cartData, deleteCartAndRedirect, guestOrder
 import json
 import datetime
 
 # Create your views here.
+
+
+def registerView(request):
+    user_form = UserForm()
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            login(request, user)
+            return redirect('store')
+        else:
+            print(request, 'An error occured during registration in user form.')
+        
+    context = {
+        'user_form': user_form,
+    }
+    return render(request, 'base/register.html', context)
+    
+def loginView(request):
+    user_form = UserLoginForm()
+    
+    if request.user.is_authenticated:
+        return redirect('store')
+    
+    if request.method == 'POST':
+        username = request.POST.get('username').lower()
+        password = request.POST.get('password')
+        
+        try:
+            user = User.objects.get(username=username)
+        except:
+            print(request, 'User does not exist')
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)
+            return redirect('store')
+        else:
+            print(request, 'Email or password does not exist')
+    context = {
+        'user_form': user_form,
+    }
+    return render(request, 'base/login.html', context)
+
+def logoutView(request):
+    logout(request)
+    return redirect('store')
+    
 def cart(request):
     order, items = cartData(request)   
     context = {'order': order, 'items': items}

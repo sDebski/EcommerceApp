@@ -1,0 +1,24 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+    <div class='box-element'>
+        <div class='login-box'>
+            <form method="post">
+                {% csrf_token %}
+                <p>{{user_form.username.label}}</p>
+                <p>{{user_form.username}}</p>
+                <p>{{user_form.password1.label}}</p>
+                <p>{{user_form.password1}}</p>
+                <p>{{user_form.password2.label}}</p>
+                <p>{{user_form.password2}}</p>
+
+                <button type="submit">Register</button>
+                <p> Already have an account? <a href="{% url 'login'%}">Login</a> </p>
+
+            </form>
+        </div>
+        
+    </div>
+    
+
+{% endblock content%}

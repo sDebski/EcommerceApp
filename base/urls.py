@@ -4,6 +4,9 @@ from django.urls import path
 
 urlpatterns = [
     path("", views.store, name='store'),
+    path("register/", views.registerView, name='register'),
+    path("login/", views.loginView, name='login'),
+    path("logout/", views.logoutView, name='logout'),
     path("cart/", views.cart, name='cart'),
     path("checkout/", views.checkout, name='checkout'),
     path('update-item/', views.updateItem, name='update-item'),
