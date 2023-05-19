@@ -286,6 +286,7 @@ font-size: large;
 }
 
 .categories {
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 	background-color: #fff;
 	padding: 1%;
 	margin-top:5%;
@@ -293,14 +294,16 @@ font-size: large;
 }
 
 .categories > form > .category > button{
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	text-align: left;
-	min-width: 100px;
+	min-width: 120px;
 	border-radius: 5px;
 	padding: 1%;
 	margin: 5px;
 	background-color: lightblue;
 	transition: 0.3s;
-	opacity: 0.8;
+	opacity: 0.75;
+	font-weight: bold;
 	-webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
 	-moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
 	box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
@@ -311,6 +314,6 @@ font-size: large;
 
 .categories > form >.category > button:hover {
 	opacity: 1;
-	width: 105px;
-	font-weight: bold;
+	width: 125px;
+	font-weight: bolder;
 }
