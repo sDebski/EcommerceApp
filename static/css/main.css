@@ -275,3 +275,42 @@ font-size: large;
 	color:#fff;
 	
 }
+
+.store-container {
+	display: grid;
+	grid-template-columns: 1fr 6fr;
+	grid-gap: 20px;
+	text-align: center;
+	padding: 1%;
+
+}
+
+.categories {
+	background-color: #fff;
+	padding: 1%;
+	margin-top:5%;
+	padding-top: 10%;
+}
+
+.categories > form > .category > button{
+	text-align: left;
+	min-width: 100px;
+	border-radius: 5px;
+	padding: 1%;
+	margin: 5px;
+	background-color: lightblue;
+	transition: 0.3s;
+	opacity: 0.8;
+	-webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+	-moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+	box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+	box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+	border-radius: 4px;
+	
+}
+
+.categories > form >.category > button:hover {
+	opacity: 1;
+	width: 105px;
+	font-weight: bold;
+}

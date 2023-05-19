@@ -26,12 +26,21 @@ def create_user_customer(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_customer(sender, instance, **kwargs):
     instance.customer.save()
+    
+
+class Category(models.Model): 
+    name=models.CharField(max_length=100, blank=True, null=True)
+    
+    def __str__(self):
+        return self.name
+    
 
 class Product(models.Model):
     name=models.CharField(max_length=250, null=True)
     price=models.DecimalField(max_digits=7, decimal_places=2)
     digital=models.BooleanField(default=False, null=True, blank=True)
     image=models.ImageField(null=True, blank=True, )
+    category=models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
     def __str__(self):
         return self.name
     
@@ -106,4 +115,3 @@ class ProductRating(models.Model):
     product=models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
     value=models.IntegerField(default=0)
 
-    

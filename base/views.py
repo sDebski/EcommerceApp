@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse, HttpResponse
 from .models import *
 from .forms import *
+from django.db.models import Q
 from .utils import cookieCart, cartData, deleteCartAndRedirect, guestOrder
 import json
 import datetime
@@ -65,13 +66,17 @@ def cart(request):
     return render(request, 'base/cart.html', context)
 
 def store(request):
-    products = Product.objects.all().reverse()
-    print(type(products))
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    products = Product.objects.filter(
+        Q(category__name__icontains=q) 
+        )
     paginator = Paginator(products, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
-    context = {'page_obj': page_obj}
+    categories = Category.objects.all()
+    
+    context = {'page_obj': page_obj, 'categories': categories}
     return render(request, 'base/store.html', context)
 
 def checkout(request):

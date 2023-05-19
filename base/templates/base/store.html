@@ -2,25 +2,42 @@
 {% load static %}
 
 {% block content %}
-
-    <div class='row'>
-        {% for product in page_obj %}
-             
-        <div class='col-lg-4'>
-            <img class='thumbnail' src="{{product.imageURL}}"/>
-            <div class='box-element product'>
-                <h6><strong>{{product.name|capfirst}}</strong></h6>
-                <hr/>
-                <button data-product={{product.id}} data-action="add" class='btn btn-outline-secondary add-btn update-cart'>Add to Cart
-                </button>
-                <a class='btn btn-outline-success' href="{% url 'view-item' product.id %}">View</a>
-                <h4 style="display:inline-block; float: right;">${{product.price|floatformat:2}}</h4>
+    <div class='store-container'>
+        <div class='.col-sm-2 categories shadow'>
+            <h3>Categories</h3>
+            <form method='GET'>
+                <div class='category'>
+                    <button type='text' name='q' value=''>&bull; All</button>
+                </div>
+                {% for category in categories %}
+                
+                <div class='category'>
+                    <button type='text' name='q' value='{{category.name}}'>&bull; {{category.name|capfirst}}</button>
+                </div>
+                
+            {% endfor %}
+        </div>
+        <div class='row'>
+            {% for product in page_obj %}
+            <div class='col-lg-4'>
+                <img class='thumbnail' src="{{product.imageURL}}"/>
+                <div class='box-element product'>
+                    <h6><strong>{{product.name|capfirst}}</strong></h6>
+                    <hr/>
+                    <button data-product={{product.id}} data-action="add" class='btn btn-outline-secondary add-btn update-cart'>Add to Cart
+                    </button>
+                    <a class='btn btn-outline-success' href="{% url 'view-item' product.id %}">View</a>
+                    <h4 style="display:inline-block; float: right;">${{product.price|floatformat:2}}</h4>
+                </div>
             </div>
+    
+            {% endfor %}
+    
         </div>
 
-        {% endfor %}
-
     </div>
+    
+
     <div class="pagination shadow my-pagination" style="margin-top:1%;">
         <span class="step-links">
             {% if page_obj.has_previous %}
