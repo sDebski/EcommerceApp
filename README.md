@@ -10,7 +10,7 @@ Buying is possible for logged in and not logged in users. Application was tested
 - Possibility of stocking items with cart based on cookies
 - Finalize the order with **PayPal** payment option.
 - Possibility of making shopping as Anonymous user also as logged in user
-- Updating amount of items in cart with on cart view based on **JS fetch**
+- Updating amount of items in cart with cart view based on **JS fetch**
 - Ranking products
 - Commenting products
 - Pagination of comments
