@@ -31,8 +31,6 @@ def registerView(request):
     return render(request, 'base/register.html', context)
     
 def loginView(request):
-    user_form = UserLoginForm()
-    
     if request.user.is_authenticated:
         return redirect('store')
     
@@ -48,17 +46,15 @@ def loginView(request):
         
         if user is not None:
             login(request, user)
-            return redirect('store')
+            return deleteCartAndRedirect(request)
         else:
             print(request, 'Email or password does not exist')
-    context = {
-        'user_form': user_form,
-    }
+    context = {}
     return render(request, 'base/login.html', context)
 
 def logoutView(request):
     logout(request)
-    return redirect('store')
+    return deleteCartAndRedirect(request)
     
 def cart(request):
     order, items = cartData(request)   
@@ -175,7 +171,6 @@ def ratingItem(request, pk, value):
             rating, created = ProductRating.objects.get_or_create(customer = request.user.customer, product = product)
             rating.value = value
             rating.save()
-            print('udalo sie')
             return redirect('view-item', pk = pk)
         else: 
             return HttpResponse('No product or wrong rating')

@@ -21,8 +21,4 @@ class CustomerForm(forms.ModelForm):
         model = Customer
         fields = ['email', 'name']
         
-class UserLoginForm(forms.ModelForm):
-    class Meta:
-        model=User
-        fields = ['username', 'password']
 

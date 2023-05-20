@@ -5,10 +5,17 @@
         <div class='login-box'>
             <form method="post">
                 {% csrf_token %}
-                <p>{{user_form.username.label}}</p>
-                <p>{{user_form.username}}</p>
-                <p>{{user_form.password.label}}</p>
-                <p>{{user_form.password}}</p>
+                <p>Username</p>
+                <p><input id="username" name="username" type="text" placeholder="e.g. dennis_ivy" /></p>
+                <p>Password</p>
+                <p>
+                    <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                    />
+                </p>
                 <button type="submit">Login</button>
                 <hr>
                 <p> Dont` have an accout? <a href="{% url 'register'%}">Register</a> </p>

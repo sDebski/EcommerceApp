@@ -53,8 +53,8 @@
 				<br>
 				<div class='box-element hidden' id='payment-info'>
 					<small>Paypal options</small>
-					{% comment %} <div id="paypal-button-container"></div> {% endcomment %}
-					<input type='submit' id='make-payment' value='Make Payment'/>
+					<div id="paypal-button-container"></div>
+					{% comment %} <input type='submit' id='make-payment' value='Make Payment'/> {% endcomment %}
 				</div>
 			</form>  
 		</div>
@@ -84,6 +84,8 @@
 </div>
 <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
 <script>
+
+	var total_price = '{{order.get_cart_total_price}}'
 	paypal.Buttons({
 
 		// Call your server to set up the transaction
@@ -91,7 +93,7 @@
 			return actions.order.create({
 				purchase_units: [{
 					amount: {
-						value: '0.01'
+						value:parseFloat(total_price).toFixed(2)
 					}
 				}]
 			});
