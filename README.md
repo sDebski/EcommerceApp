@@ -21,30 +21,41 @@ Buying is possible for logged in and not logged in users. Application was tested
 ## Screenshoots from app:
 
 ### Main page of the app
-![main page of the app](https://github.com/sDebski/studbuddy/blob/master/images/store.png?raw=true)
+![main page of the app](https://github.com/sDebski/EcommerceApp/blob/master/images/store.png?raw=true)
 ---
 
-### Profile
-![profile](https://github.com/sDebski/studbuddy/blob/master/static/images/profile.png?raw=true)
+### Cart view
+![Cart-view](https://github.com/sDebski/EcommerceApp/blob/master/images/cart-view.png?raw=true)
 ---
 
-### Recent activites
-![Recent activites](https://github.com/sDebski/studbuddy/blob/master/static/images/recent-activites.png?raw=true)
+### Payment View
+![Payment-view](https://github.com/sDebski/EcommerceApp/blob/master/images/payment-view.png?raw=true)
 ---
 
-### Room
-![Room](https://github.com/sDebski/studbuddy/blob/master/static/images/room.png?raw=true)
+### PayPal payment
+![PayPal-payment](https://github.com/sDebski/EcommerceApp/blob/master/images/payment.png?raw=true)
+---
+
+### Anonymous buy
+![Anonymous-buy](https://github.com/sDebski/EcommerceApp/blob/master/images/anonymous-buy.png?raw=true)
+---
+
+### View item
+![View-item](https://github.com/sDebski/EcommerceApp/blob/master/images/view-item.png?raw=true)
+---
+
+### Browse products
+![Browse-products](https://github.com/sDebski/EcommerceApp/blob/master/images/categories.png?raw=true)
+---
+
+### Registration
+![Registration](https://github.com/sDebski/EcommerceApp/blob/master/images/registration.png?raw=true)
 ---
 
 
-### Room creation
-![Room-creation](https://github.com/sDebski/studbuddy/blob/master/static/images/room-create.png?raw=true)
----
 
-### Browse topics
-![Browse-topics](https://github.com/sDebski/studbuddy/blob/master/static/images/browse-topics.png?raw=true)
----
 
-The app is based on tutorial [Django App](https://www.youtube.com/watch?v=PtQiiknWUcI).
+
+The app is based on tutorial [Django App](https://www.youtube.com/playlist?list=PL-51WBLyFTg0omnamUjL1TCVov7yDTRng).
 
 
